@@ -12,6 +12,6 @@ environments:
   - ACCEPTANCE
   - PRODUCTION
 
-PERFORMANCE: !include 'deployment/environments/integration.yml'
-ACCEPTANCE: !include 'deployment/environments/stage.yml'
+PERFORMANCE: !include 'deployment/environments/performance.yml'
+ACCEPTANCE: !include 'deployment/environments/acceptance.yml'
 PRODUCTION: !include 'deployment/environments/production.yml'
