@@ -1,0 +1,17 @@
+---
+version: 2
+deployment:
+  name: Bamboo Specs Demo Again
+  source-plan: DEMO-BSD
+
+release-naming:
+  next-version-name: ${bamboo.ci_variables.VERSION}
+
+environments:
+  - PERFORMANCE
+  - ACCEPTANCE
+  - PRODUCTION
+
+PERFORMANCE: !include 'deployment/environments/performance.yml'
+ACCEPTANCE: !include 'deployment/environments/acceptance.yml'
+PRODUCTION: !include 'deployment/environments/production.yml'

@@ -7,5 +7,3 @@
 !include 'deployment/plan.yml'
 ---
 !include 'deployment/plan-permissions.yml'
----
-!include 'deployment/plan1.yml'
