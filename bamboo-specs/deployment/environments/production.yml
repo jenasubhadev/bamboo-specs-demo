@@ -3,9 +3,9 @@ notifications: !include 'deployment/shared/notifications.yml'
 variables:
   NODE_ENV: production
   REPLICAS: 3
-  PAG01: 
-  PAG02:
-  PAG03:
-  PAG04:
-  PAG05:
+  PAG01: PRODPAG01
+  PAG02: PRODPAG02
+  PAG03: PRODPAG03
+  PAG04: PRODPAG04
+  PAG05: PRODPAG05
 tasks: !include 'deployment/shared/tasks.yml'
