@@ -67,10 +67,7 @@
     interpreter: SHELL
     file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
     argument: --environment=${bamboo.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag01
-- test-parser:
-    type: junit
-    ignore-time: 'false'
-    test-results: '**/*.xml'
+
 - script:
     interpreter: SHELL
     file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
@@ -104,10 +101,6 @@
     interpreter: SHELL
     file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
     argument: --environment=${bamboo.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag02
-- test-parser:
-    type: junit
-    ignore-time: 'false'
-    test-results: '**/*.xml'
 - script:
     interpreter: SHELL
     file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
@@ -141,10 +134,6 @@
     interpreter: SHELL
     file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
     argument: --environment=${bamboo.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag04
-- test-parser:
-    type: junit
-    ignore-time: 'false'
-    test-results: '**/*.xml'
 - script:
     interpreter: SHELL
     file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
@@ -177,10 +166,6 @@
     interpreter: SHELL
     file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
     argument: --environment=${bamboo.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag04
-- test-parser:
-    type: junit
-    ignore-time: 'false'
-    test-results: '**/*.xml'
 - script:
     interpreter: SHELL
     file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
