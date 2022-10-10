@@ -7,14 +7,6 @@
     interpreter: SHELL
     file: /home/jboss/bamboo-scripts/TUnieDeployFunctions.sh
     argument: cleanUpDbMaintainFiles
-- artifact-download:
-    artifacts:
-      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront
-        name: StoreFront-static.zip
-      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront/server/slot/deployments/BackendWebServices.war
-        name: BackendWebServices folder
-      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront/server/slot/deployments/
-        name: TUnieAPI.ear
 - script:
     interpreter: SHELL
     file: /home/jboss/bamboo-scripts/TUnieDeployFunctions.sh
