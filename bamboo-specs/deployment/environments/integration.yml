@@ -3,6 +3,11 @@ notifications: !include 'deployment/shared/notifications.yml'
 variables:
   NODE_ENV: int
   REPLICAS: 1
+  PAG01: INTPAG01
+  PAG02: INTPAG02
+  PAG03: INTPAG03
+  PAG04: INTPAG04
+  PAG05: INTPAG05
 tasks: !include 'deployment/shared/tasks.yml'
 triggers:
   - stage-success:

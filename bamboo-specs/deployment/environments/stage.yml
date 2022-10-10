@@ -3,4 +3,9 @@ notifications: !include 'deployment/shared/notifications.yml'
 variables:
   NODE_ENV: stage
   REPLICAS: 2
+  PAG01: STGPAG01
+  PAG02: STGPAG02
+  PAG03: STGPAG03
+  PAG04: STGPAG04
+  PAG05: STGPAG05
 tasks: !include 'deployment/shared/tasks.yml'

@@ -45,15 +45,15 @@
     argument: pag01 ${bamboo.deploy.environment} stop
 - command:
     executable: Gradle
-    argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=NLTUOCPLPAG01
+    argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAG01}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - command:
     executable: Gradle
-    argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.environment} -PAtgApplications=APIStoreFront -PServers=NLTUOCPLPAG01
+    argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAG01}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - command:
     executable: Gradle
-    argument: atg_control_jboss -PCommand=start -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=NLTUOCPLPAG01
+    argument: atg_control_jboss -PCommand=start -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAG01}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - script:
     interpreter: SHELL
@@ -79,15 +79,15 @@
     argument: pag02 ${bamboo.deploy.environment} stop
 - command:
     executable: Gradle
-    argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=NLTUOCPLPAG02
+    argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAG02}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - command:
     executable: Gradle
-    argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.environment} -PAtgApplications=APIStoreFront -PServers=NLTUOCPLPAG02
+    argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAG02}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - command:
     executable: Gradle
-    argument: atg_control_jboss -PCommand=start -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=NLTUOCPLPAG02
+    argument: atg_control_jboss -PCommand=start -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAG02}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - script:
     interpreter: SHELL
@@ -112,15 +112,15 @@
     argument: pag04 ${bamboo.deploy.environment} stop
 - command:
     executable: Gradle
-    argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=NLTUOCPLPAG04
+    argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAG03}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - command:
     executable: Gradle
-    argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.environment} -PAtgApplications=APIStoreFront -PServers=NLTUOCPLPAG04
+    argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAG03}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - command:
     executable: Gradle
-    argument: atg_control_jboss -PCommand=start -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=NLTUOCPLPAG04
+    argument: atg_control_jboss -PCommand=start -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAG03}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - script:
     interpreter: SHELL
@@ -144,15 +144,15 @@
     argument: pag01 ${bamboo.deploy.environment} stop
 - command:
     executable: Gradle
-    argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=NLTUOCPLPAG04
+    argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAG04}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - command:
     executable: Gradle
-    argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.environment} -PAtgApplications=APIStoreFront -PServers=NLTUOCPLPAG04
+    argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAG04}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - command:
     executable: Gradle
-    argument: atg_control_jboss -PCommand=start -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=NLTUOCPLPAG04
+    argument: atg_control_jboss -PCommand=start -PEnvironment=${bamboo.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAG04}
     working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
 - script:
     interpreter: SHELL
