@@ -2,7 +2,7 @@
 version: 2
 deployment:
   name: Bamboo Specs Demo
-  source-plan: DEMO-BSD
+  source-plan: DEMO-FIR
 
 release-naming:
   next-version-name: ${bamboo.ci_variables.VERSION}
