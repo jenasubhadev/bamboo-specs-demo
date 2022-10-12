@@ -1,0 +1,38 @@
+  key: RRSPECPAG01
+  tasks:
+# Checkout Task for default repository will be added implicitly during Specs import
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag01 ${bamboo.environment} disable
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag01 ${bamboo.environment}
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag01 ${bamboo.environment} stop
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_restart.sh
+      argument: pag01 ${bamboo.environment} stop
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_restart.sh
+      argument: pag01 ${bamboo.environment} start
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - script:
+      interpreter: SHELL
+      file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
+      argument: --environment=${bamboo.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag01
+  - test-parser:
+      type: junit
+      ignore-time: 'false'
+      test-results: '**/*.xml'
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag01 ${bamboo.environment} active
+  artifact-subscriptions: []

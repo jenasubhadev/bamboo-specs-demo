@@ -1,0 +1,15 @@
+---
+version: 2
+plan:
+  key: ZDD-RRSPEC
+plan-permissions:
+  - users:
+      - admin
+    groups:
+      - commerce
+    permissions:
+      - view
+      - edit
+      - build
+      - clone
+      - admin
