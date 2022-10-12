@@ -1,2 +1,2 @@
-  key: PAG02
-- !include 'rolling_release/build/tasks/task.yml'
+key: PAG02
+!include 'rolling_release/build/tasks/task.yml'
