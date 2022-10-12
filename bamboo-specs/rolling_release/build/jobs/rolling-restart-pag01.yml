@@ -1,8 +1,2 @@
   key: PAG01
-  tasks: 
-# Checkout Task for default repository will be added implicitly during Specs import
-  - script:
-      interpreter: SHELL
-      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
-      argument: pag01 ${bamboo.environment} disable
-!include: 'rolling_release/build/tasks/task.yml'
+  tasks: !include: 'rolling_release/build/tasks/task.yml'
