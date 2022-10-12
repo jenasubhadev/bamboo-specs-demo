@@ -1,2 +1,3 @@
-key: PAG04
-!include 'rolling_release/build/tasks/task.yml'
+  key: PAG04
+  tasks: 
+  - include_tasks: 'rolling_release/build/tasks/task.yml'
