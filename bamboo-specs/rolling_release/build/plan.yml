@@ -14,6 +14,29 @@ stages:
     final: false
     jobs:
     - Rolling Release PAG01
+- Rolling Release to Pag02:
+    manual: false
+    final: false
+    jobs:
+    - Rolling Release PAG02
+- Rolling Release to Pag03:
+    manual: false
+    final: false
+    jobs:
+    - Rolling Release PAG03
+- Rolling Release to Pag04:
+    manual: false
+    final: false
+    jobs:
+    - Rolling Release PAG04
+- Rolling Release PAG05:
+    manual: false
+    final: false
+    jobs:
+    - Rolling Release PAG05
 
 Rolling Release PAG01: !include 'rolling_release/build/jobs/rolling-restart-pag01.yml'
-#Rolling Release PAG01: !include 'rolling_release/build/tasks/task.yml'
+Rolling Release PAG02: !include 'rolling_release/build/jobs/rolling-restart-pag02.yml'
+Rolling Release PAG03: !include 'rolling_release/build/jobs/rolling-restart-pag03.yml'
+Rolling Release PAG04: !include 'rolling_release/build/jobs/rolling-restart-pag04.yml'
+Rolling Release PAG05: !include 'rolling_release/build/jobs/rolling-restart-pag05.yml'
