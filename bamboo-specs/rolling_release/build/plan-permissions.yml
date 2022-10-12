@@ -4,9 +4,7 @@ plan:
   key: ZDD-RRSPEC
 plan-permissions:
   - users:
-      - admin
-    groups:
-      - commerce
+      - bamboo
     permissions:
       - view
       - edit
