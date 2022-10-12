@@ -1,29 +1,29 @@
   - script:
       interpreter: SHELL
       file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
-      argument: pag01 ${bamboo.environment} disable
+      argument: ${bamboo.shortJobKey} ${bamboo.environment} disable
   - script:
       interpreter: SHELL
       file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
-      argument: pag01 ${bamboo.environment}
+      argument: ${bamboo.shortJobKey} ${bamboo.environment}
   - script:
       interpreter: SHELL
       file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
-      argument: pag01 ${bamboo.environment} stop
+      argument: ${bamboo.shortJobKey} ${bamboo.environment} stop
   - script:
       interpreter: SHELL
       file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_restart.sh
-      argument: pag01 ${bamboo.environment} stop
+      argument: ${bamboo.shortJobKey} ${bamboo.environment} stop
       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
   - script:
       interpreter: SHELL
       file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_restart.sh
-      argument: pag01 ${bamboo.environment} start
+      argument: ${bamboo.shortJobKey} ${bamboo.environment} start
       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
   - script:
       interpreter: SHELL
       file: /opt/buildVerificationTesting/${bamboo.environment}/smokeTests.sh
-      argument: --environment=${bamboo.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag01
+      argument: --environment=${bamboo.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=${bamboo.shortJobKey}
   - test-parser:
       type: junit
       ignore-time: 'false'
@@ -31,4 +31,4 @@
   - script:
       interpreter: SHELL
       file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
-      argument: pag01 ${bamboo.environment} active
+      argument: ${bamboo.shortJobKey} ${bamboo.environment} active
