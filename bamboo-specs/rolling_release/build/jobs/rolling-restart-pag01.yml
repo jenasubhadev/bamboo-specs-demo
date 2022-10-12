@@ -1,2 +1,2 @@
-  key: PAG01
+  key: pag01
   tasks: !include 'rolling_release/build/tasks/task.yml'
