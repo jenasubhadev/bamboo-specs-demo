@@ -32,4 +32,3 @@
       interpreter: SHELL
       file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
       argument: ${bamboo.shortJobKey} ${bamboo.environment} active
-  artifact-subscriptions: []
