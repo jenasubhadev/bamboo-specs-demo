@@ -1,4 +1,4 @@
-  key: RRSPECPAG02
+  key: PAG02
   tasks:
 # Checkout Task for default repository will be added implicitly during Specs import
   - script:
