@@ -1,6 +1,4 @@
 ---
-
-notifications: !include 'rolling_release/deployment/shared/notifications.yml'
 variables:
     PAGSERVER_1: NLOCPPPAG01
     PAGSERVER_2: NLOCPPPAG02
