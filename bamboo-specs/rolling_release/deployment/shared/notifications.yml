@@ -1,1 +1,2 @@
-
+- events:
+  - deployment-started-and-finished
