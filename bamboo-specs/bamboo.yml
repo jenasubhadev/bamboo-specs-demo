@@ -3,8 +3,3 @@
 !include 'rolling_release/build/plan.yml'
 ---
 !include 'rolling_release/build/plan-permissions.yml'
-
----
-!include 'rolling_release/deployment/plan.yml'
----
-!include 'rolling_release/deployment/plan-permissions.yml'
