@@ -9,15 +9,6 @@
       file: /home/jboss/bamboo-scripts/TUnieDeployFunctions.sh
       argument: cleanUpDbMaintainFiles
       description: Clean up dbmaintain folder
-  - artifact-download:
-      artifacts:
-      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront
-        name: StoreFront-static.zip
-      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront/server/slot/deployments/
-        name: TUnieAPI.ear
-      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront/server/slot/deployments/BackendWebServices.war
-        name: BackendWebServices folder
-      description: Download API release contents
   - script:
       interpreter: SHELL
       file: /home/jboss/bamboo-scripts/TUnieDeployFunctions.sh
