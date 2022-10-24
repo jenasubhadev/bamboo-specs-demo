@@ -1,4 +1,5 @@
 - events:
   - deployment-started-and-finished
   recipients:
-    - users: bamboo
+    - users: 
+      - bamboo
