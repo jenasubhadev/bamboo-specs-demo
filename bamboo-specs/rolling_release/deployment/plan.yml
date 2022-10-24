@@ -1,0 +1,19 @@
+---
+version: 2
+deployment:
+  name: TUnie OCP ZDD Deploy Spec
+  source-plan: ZDD-RRSPEC
+
+release-naming:
+  next-version-name: release-305
+
+environments:
+  - ACCEPTANCE
+  - PRODUCTION
+  - PERFORMANCE
+
+
+ACCEPTANCE: !include 'rolling_release/deployment/environments/acceptance.yml'
+PERFORMANCE: !include 'rolling_release/deployment/environments/performance.yml'
+PRODUCTION: !include 'rolling_release/deployment/environments/production.yml'
+

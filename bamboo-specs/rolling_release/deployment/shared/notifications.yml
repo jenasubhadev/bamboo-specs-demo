@@ -1,0 +1,3 @@
+- events:
+  - deployment-started-and-finished
+  recipients:

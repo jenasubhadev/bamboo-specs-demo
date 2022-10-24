@@ -1,0 +1,202 @@
+  - clean
+  - script:
+      interpreter: SHELL
+      file: /home/jboss/bamboo-scripts/TUnieDeployFunctions.sh
+      argument: cleanArtefactFolders
+      description: Clean Artefacts Directories
+  - script:
+      interpreter: SHELL
+      file: /home/jboss/bamboo-scripts/TUnieDeployFunctions.sh
+      argument: cleanUpDbMaintainFiles
+      description: Clean up dbmaintain folder
+  - artifact-download:
+      artifacts:
+      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront
+        name: StoreFront-static.zip
+      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront/server/slot/deployments/
+        name: TUnieAPI.ear
+      - destination: /opt/gradle/atg-deploy/Input/BuildInputs/APIStoreFront/server/slot/deployments/BackendWebServices.war
+        name: BackendWebServices folder
+      description: Download API release contents
+  - script:
+      interpreter: SHELL
+      file: /home/jboss/bamboo-scripts/TUnieDeployFunctions.sh
+      argument: markWarFilesFrontend ${bamboo.deploy.environment}
+      description: Mark the WARs and EARs files as .dodeploy
+  - script:
+      interpreter: SHELL
+      scripts:
+      - |-
+        #!/bin/sh
+        export LANG=en_US
+        #cd ${bamboo_ATG_DEPLOY_HOME} || exit 1
+        ${bamboo.GRADLE_HOME}/bin/gradle atg_build -PRFC=AutoBuild -PAtgApplications=APIStoreFront -PEnvironment=${bamboo.deploy.environment} -PAtgEarFiles=/Input/BuildInputs -PDBMaintainDirectory=/opt/gradle/atg-deploy/Input/BuildInputs/sql
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - script:
+      interpreter: SHELL
+      scripts:
+      - echo -n "releaseNumber=" | cat - ${bamboo.ATG_DEPLOY_HOME}/${bamboo.deploy.environment}/releaseNumber.txt > ${bamboo.ATG_DEPLOY_HOME}/variable.txt
+      argument: createVariables
+      description: Create releaseNumber file for later use
+  - inject-variables:
+      file: ../../../../../../gradle/atg-deploy/variable.txt
+      scope: LOCAL
+      namespace: release
+      description: Get the release number for use in the release task
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag01 ${bamboo.deploy.environment} disable
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag01 ${bamboo.deploy.environment}
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag01 ${bamboo.deploy.environment} stop
+  - command:
+      executable: Gradle
+      argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_1}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.deploy.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAGSERVER_1}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_1}       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+  - script:
+      interpreter: SHELL
+      file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
+      argument: --environment=${bamboo.deploy.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag01
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag01 ${bamboo.deploy.environment} active
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag02 ${bamboo.deploy.environment} disable
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag02 ${bamboo.deploy.environment}
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag02 ${bamboo.deploy.environment} stop
+  - command:
+      executable: Gradle
+      argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_2}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.deploy.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAGSERVER_2}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_2}       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+  - script:
+      interpreter: SHELL
+      file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
+      argument: --environment=${bamboo.deploy.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag02
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag02 ${bamboo.deploy.environment} active
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag03 ${bamboo.deploy.environment} disable
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag03 ${bamboo.deploy.environment}
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag03 ${bamboo.deploy.environment} stop
+  - command:
+      executable: Gradle
+      argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_3}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.deploy.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAGSERVER_3}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_3}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+  - script:
+      interpreter: SHELL
+      file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
+      argument: --environment=${bamboo.deploy.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag03
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag03 ${bamboo.deploy.environment} active
+
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag04 ${bamboo.deploy.environment} disable
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag04 ${bamboo.deploy.environment}
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag04 ${bamboo.deploy.environment} stop
+  - command:
+      executable: Gradle
+      argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_4}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.deploy.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAGSERVER_4}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_4}       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+  - script:
+      interpreter: SHELL
+      file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
+      argument: --environment=${bamboo.deploy.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag04
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag04 ${bamboo.deploy.environment} active
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag05 ${bamboo.deploy.environment} disable
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag05 ${bamboo.deploy.environment}
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag05 ${bamboo.deploy.environment} stop
+  - command:
+      executable: Gradle
+      argument: atg_control_jboss -PCommand=stop -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_5}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: atg_deploy_release -PRFC=${bamboo.release.releaseNumber} -PEnvironment=${bamboo.deploy.environment} -PAtgApplications=APIStoreFront -PServers=${bamboo.PAGSERVER_5}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
+  - command:
+      executable: Gradle
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_5}       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+  - script:
+      interpreter: SHELL
+      file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
+      argument: --environment=${bamboo.deploy.environment} --tests=jmx --dynAdminPass=${bamboo.DYN_ADMIN_PASSWORD_PREPROD} --pagserver=pag05
+  - script:
+      interpreter: SHELL
+      file: /opt/gradle/atg-deploy/buildSrc/src/main/sh/rolling_release_utils.sh
+      argument: pag05 ${bamboo.deploy.environment} active

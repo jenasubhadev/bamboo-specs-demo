@@ -1,0 +1,11 @@
+---
+
+notifications: !include 'rolling_release/deployment/shared/notifications.yml'
+variables:
+    PAGSERVER_1: NLOCPAPAG01
+    PAGSERVER_2: NLOCPAPAG02
+    PAGSERVER_3: NLOCPAPAG03
+    PAGSERVER_4: NLOCPAPAG04
+    PAGSERVER_5: NLOCPAPAG05
+
+tasks: !include 'rolling_release/deployment/shared/tasks.yml'
