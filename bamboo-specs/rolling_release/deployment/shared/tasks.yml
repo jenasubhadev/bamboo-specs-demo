@@ -65,7 +65,8 @@
       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
   - command:
       executable: Gradle
-      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_1}       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_1}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
   - script:
       interpreter: SHELL
       file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
@@ -96,7 +97,8 @@
       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
   - command:
       executable: Gradle
-      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_2}       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_2}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
   - script:
       interpreter: SHELL
       file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
@@ -160,7 +162,8 @@
       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
   - command:
       executable: Gradle
-      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_4}       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_4}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
   - script:
       interpreter: SHELL
       file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
@@ -191,7 +194,8 @@
       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}
   - command:
       executable: Gradle
-      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_5}       working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
+      argument: 'atg_control_jboss -PCommand=start -PEnvironment=${bamboo.deploy.environment} -PRFC=${bamboo.release.releaseNumber} -PAtgApplications=APIStoreFront -PServer=${bamboo.PAGSERVER_5}
+      working-dir: ../../../../../../../${bamboo.ATG_DEPLOY_HOME}'
   - script:
       interpreter: SHELL
       file: /opt/buildVerificationTesting/${bamboo.deploy.environment}/smokeTests.sh
